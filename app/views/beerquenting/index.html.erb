@@ -1,0 +1,6 @@
+<div class="contents row">
+  <% @beerquentings.each do |review| %>
+    <%= render partial: "beerquenting", locals:{ review: review }%>
+  <% end %>
+  <%= paginate(@beerquentings) %>
+</div>
