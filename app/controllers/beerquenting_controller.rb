@@ -1,12 +1,13 @@
 class BeerquentingController < ApplicationController
   before_action :move_to_index, except: :index
+  before_filter :search
 
   def index
     @beerquentings = Review.includes(:user).page(params[:page]).per(5).order("created_at DESC")
-    # binding.pry
   end
 
   def new
+    # binding.pry
   end
 
   def create
@@ -31,9 +32,14 @@ class BeerquentingController < ApplicationController
     end
   end
 
+  def search
+    @q = Shop.where('area LIKE(?)', "%#{params[:keyword]}%").limit(5)
+  end
+
   def show
+    @shop_name = Shop.all
     @review = Review.find(params[:id])
-    @comments = @review.comments.includes(:user)
+    @comments = Comment.find(params[:id])
   end
 
   private

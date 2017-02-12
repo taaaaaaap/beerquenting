@@ -11,7 +11,7 @@
           <%= link_to 'DELETE', "/beerquenting/#{@review.id}", method: :delete %>
         </li>
       </ul>
-    </div>
+      </div>
     <% end %>
     <%= simple_format(@review.usage) %>
     <span class="name">
@@ -20,20 +20,18 @@
       </a>
     </span>
   </div>
-    <div class="container"> 
+  <div class="container">
     <% if current_user %>
       <%= form_tag("/beerquenting/#{@review.id}/comments", method: :post) do %>
         <textarea cols="30" name="text" placeholder="COMMENT" rows="2"></textarea>
         <input type="submit" value="SENT">
-      <% end %>
     <% end %>
     <div class="comments">
       <h4>＜COMMENTS＞</h4>
-        <% if @comments %>
         <% @comments.each do |comment| %>
           <p>
-            <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
-            <%= comment.text %>
+          <%= comment.user.nickname %>
+          <%= comment.text %>
           </p>
         <% end %>
       <% end %>
