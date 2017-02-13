@@ -30,7 +30,7 @@
       <h4>＜COMMENTS＞</h4>
         <% @comments.each do |comment| %>
           <p>
-          <%= comment.user.nickname %>
+          <%= comment.review.user.nickname %><br>
           <%= comment.text %>
           </p>
         <% end %>

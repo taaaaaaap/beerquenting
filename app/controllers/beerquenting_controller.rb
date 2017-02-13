@@ -7,11 +7,12 @@ class BeerquentingController < ApplicationController
   end
 
   def new
-    # binding.pry
+    @review = Review.new
   end
 
   def create
-    Review.create(usage:params[:usage],liquor_kinds: params[:liquor_kinds],budget:params[:budget],image: params[:image],user_id:current_user.id)
+    # binding.pry
+    Review.create(usage:review_params[:usage],liquor_kinds:review_params[:liquor_kinds],budget:review_params[:budget],picture:review_params[:picture],user_id:current_user.id)
   end
 
   def destroy
@@ -39,15 +40,23 @@ class BeerquentingController < ApplicationController
   def show
     @shop_name = Shop.all
     @review = Review.find(params[:id])
-    @comments = Comment.find(params[:id])
+    @comments = @review.comments.includes(:user)
   end
 
   private
   def review_params
-    params.permit(:usage,:liquor_kinds,:budget,:image)
+    params.require(:review).permit(:usage,:liquor_kinds,:budget,:picture)
   end
 
   def move_to_index
     redirect_to action: index unless user_signed_in?
+
+  def set_shop
+    @shop = Shop.find(params[:id])
   end
+
+  def shop_params
+    params.require(:review).permit(:description, :image)
+  end
+end
 end

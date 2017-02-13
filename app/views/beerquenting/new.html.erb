@@ -1,12 +1,18 @@
 <div class="contents row">
   <div class="container">
-    <%= form_tag('/beerquenting', method: :post) do %>
+    <%= form_for @review, url:{action:"create"} do |f|%>
       <h3>POST</h3>
-      <input placeholder="usage" type="text" name="usage">
-      <input placeholder="liqour_kinds" type="text" name="liquor_kinds">
-      <input placeholder="budget" type="text" name="budget">
-      <input placeholder="Image Url" type="text" name="image">
-      <input type="submit" value="SENT">
+        <div class = "field">
+          <%= f.label :picture %><br>
+          <%= f.file_field :picture %>
+          <%= f.label :usage %><br>
+          <%= f.text_field :usage %>
+          <%= f.label :liqour_kinds %><br>
+          <%= f.text_field :liquor_kinds %>
+          <%= f.label :budget %><br>
+          <%= f.text_field :budget %>
+          <%= f.submit "submit"%>
+        </div>
     <% end %>
   </div>
 </div>

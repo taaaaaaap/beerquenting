@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208100945) do
+ActiveRecord::Schema.define(version: 20170212102630) do
 
   create_table "bars", force: :cascade do |t|
     t.string   "bar_name",   limit: 255
@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 20170208100945) do
     t.string   "usage",        limit: 255
     t.text     "liquor_kinds", limit: 65535
     t.text     "budget",       limit: 65535
-    t.text     "image",        limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "shop_name",    limit: 255
     t.integer  "shop_id",      limit: 4
+    t.text     "image",        limit: 65535
+    t.string   "picture",      limit: 255
   end
 
   create_table "shops", force: :cascade do |t|
@@ -47,6 +48,8 @@ ActiveRecord::Schema.define(version: 20170208100945) do
     t.datetime "updated_at",               null: false
     t.text     "area",       limit: 65535
   end
+
+  add_index "shops", ["id"], name: "id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

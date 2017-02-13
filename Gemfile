@@ -55,3 +55,6 @@ group :production, :staging do
 end
 gem 'mechanize'
 gem 'ransack'
+gem 'carrierwave'
+gem 'omniauth-facebook'
+gem 'fog'
