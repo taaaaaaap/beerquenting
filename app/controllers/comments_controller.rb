@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
   def create
-    binding.pry
+    # binding.pry
     @comment = Comment.create(text: comment_params[:text], review_id: comment_params[:beerquenting_id], user_id: current_user.id,)
     redirect_to "/beerquenting/#{@comment.review_id}"
   end

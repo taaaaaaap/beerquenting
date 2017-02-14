@@ -3,6 +3,7 @@ class BeerquentingController < ApplicationController
   before_filter :search
 
   def index
+    # binding.pry
     @beerquentings = Review.includes(:user).page(params[:page]).per(5).order("created_at DESC")
   end
 
@@ -11,8 +12,7 @@ class BeerquentingController < ApplicationController
   end
 
   def create
-    # binding.pry
-    Review.create(usage:review_params[:usage],liquor_kinds:review_params[:liquor_kinds],budget:review_params[:budget],picture:review_params[:picture],user_id:current_user.id)
+    Review.create(usage:review_params[:usage],liquor_kinds:review_params[:liquor_kinds],budget:review_params[:budget],picture:review_params[:picture],user_id:current_user.id,shop_id:review_params[:shop_id])
   end
 
   def destroy
@@ -40,12 +40,12 @@ class BeerquentingController < ApplicationController
   def show
     @shop_name = Shop.all
     @review = Review.find(params[:id])
-    @comments = @review.comments.includes(:user)
+    @comments = @review.comments.includes(params[:user_id])
   end
 
   private
   def review_params
-    params.require(:review).permit(:usage,:liquor_kinds,:budget,:picture)
+    params.permit(:usage,:liquor_kinds,:budget,:picture,:shop_id)
   end
 
   def move_to_index
@@ -56,7 +56,7 @@ class BeerquentingController < ApplicationController
   end
 
   def shop_params
-    params.require(:review).permit(:description, :image)
+    params.require(:review).permit(:picture, :review_id)
   end
 end
 end

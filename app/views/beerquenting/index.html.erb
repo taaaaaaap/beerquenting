@@ -1,6 +1,6 @@
 <div class="contents row">
   <%= form_tag('/beerquenting/search', method: :get) do %>
-    <input class="search__query" name="keyword" placeholder="駅名で検索" type="text" value=""><button class="btn-search" title="検索" type="submit"><i class="icon-search"></i></button>
+    <input class="search__query" name="keyword" placeholder="駅名で検索" type="text" value=""><button class="btn-search" title="検索" type="submit" value="search"><i class="icon-search" value="search-button"></i></button>
     <% end %>
   <% @beerquentings.each do |review| %>
     <%= render partial: "beerquenting", locals:{ review: review }%>
