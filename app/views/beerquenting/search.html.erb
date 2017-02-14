@@ -1,6 +1,8 @@
 <% @q.each do |shop| %>
   <%= shop.shop_name %><br>
   <%= shop.address %><br>
-  <%=  %>
-  <%= @comments %><br>
+  <% shop.reviews.each do |review| %>
+    <%= image_tag(review.picture) %>
+  <% end %>
+  <!-- <%= @comments %><br> -->
 <% end %>
